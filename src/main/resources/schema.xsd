@@ -1,6 +1,7 @@
 <xs:schema elementFormDefault="unqualified"
            targetNamespace="http://soap.singleservicehr.creditpipeline.intellect.group/" version="1.0"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://soap.singleservicehr.creditpipeline.intellect.group/">
     <xs:element name="createEmployee" type="tns:createEmployee"/>
     <xs:element name="createEmployeeResponse" type="tns:createEmployeeResponse"/>
     <xs:element name="createSubdivision" type="tns:createSubdivision"/>

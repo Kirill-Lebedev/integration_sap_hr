@@ -1,1 +1,4 @@
-
+logging:
+  level:
+    group.intellect.creditpipeline.singleservicehr: DEBUG
+    org.springframework.web: DEBUG

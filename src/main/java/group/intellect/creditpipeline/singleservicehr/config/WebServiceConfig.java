@@ -27,9 +27,9 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean(name = "sap_hr")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("SingleServiceHrWs");
+        wsdl11Definition.setPortTypeName("SingleServiceHrWsImplServiceSoapBinding");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://soap.singleservicehr.creditpipeline.intellect.group/");
+        wsdl11Definition.setTargetNamespace("http://soap.singleservicehr.creditpipeline.intellect.group");
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }

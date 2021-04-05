@@ -7,39 +7,45 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 
 @Endpoint
 @Slf4j
 public class Endpoints {
-    private static final  String NAMESPACE_URI = "http://soap.singleservicehr.creditpipeline.intellect.group/";
+    private static final String NAMESPACE_URI = "http://soap.singleservicehr.creditpipeline.intellect.group";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createEmployee")
     @ResponsePayload
-    public CreateEmployeeResponse createEmployee(@RequestPayload CreateEmployee createEmployee) {
-        log.debug("Got createEmloyee request{}", createEmployee);
-        CreateEmployeeResponse createEmployeeResponse = new CreateEmployeeResponse();
+    public JAXBElement<CreateEmployeeResponse> createEmployee(@RequestPayload JAXBElement<CreateEmployee> createEmployee) {
+        log.debug("Got createEmloyee request{}", createEmployee.getValue());
 
-        return createEmployeeResponse;
+        return createJaxbElement(new CreateEmployeeResponse(), CreateEmployeeResponse.class);
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createSubdivision")
     @ResponsePayload
-    public CreateSubdivisionResponse createSubdivisionResponse(@RequestPayload CreateSubdivision createSubdivision) {
-        log.debug("Got createSubdivision request{}", createSubdivision);
-        CreateSubdivisionResponse createSubdivisionResponse = new CreateSubdivisionResponse();
+    public JAXBElement<CreateSubdivisionResponse> createSubdivision(@RequestPayload JAXBElement<CreateSubdivision> createSubdivision) {
+        log.debug("Got createSubdivision request{}", createSubdivision.getValue());
+       /* CreateSubdivisionResponse createSubdivisionResponse = new CreateSubdivisionResponse();
+        SubdivisionCreationResponce subdivisionCreationResponce = new SubdivisionCreationResponce();
+        subdivisionCreationResponce.setResult(Result.SUCCESS);
+        createSubdivisionResponse.setReturn(subdivisionCreationResponce);*/
 
-        return createSubdivisionResponse;
+        return createJaxbElement(new CreateSubdivisionResponse(), CreateSubdivisionResponse.class);
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createUser")
     @ResponsePayload
-    public CreateUserResponse createUserResponse(@RequestPayload CreateUser createUser) {
-        log.debug("Got createUser request{}", createUser);
-        CreateUserResponse createUserResponse = new CreateUserResponse();
+    public JAXBElement<CreateUserResponse> createUser(@RequestPayload JAXBElement<CreateUser> createUser) {
+        log.debug("Got createUser request{}", createUser.getValue());
 
-        return createUserResponse;
+        return createJaxbElement(new CreateUserResponse(), CreateUserResponse.class);
     }
 
-
+    private <T> JAXBElement<T> createJaxbElement(T object, Class<T> clazz) {
+        return new JAXBElement<>(new QName(clazz.getSimpleName()), clazz, object);
+    }
 
 }
